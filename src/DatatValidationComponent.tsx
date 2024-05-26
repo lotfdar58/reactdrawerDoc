@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState , useEffect, FC} from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Button, Table, TableBody, 
          TableCell, TableContainer, TableHead, TableRow, Paper,Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -6,12 +6,12 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { green } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
-import { columnsModel } from './config';
+import { columnsModel } from './config.tsx';
 
-const DatatValidationComponent = () => {
-  const [data, setData] = useState(null);
-  const [editableData, setEditableData] = useState(null);
-  const [inputsDisabled, setInputsDisabled] = useState(false);
+const DatatValidationComponent: FC = () => {
+  const [data, setData] = useState<any>(null);
+  const [editableData, setEditableData] = useState<string | null>(null);
+  const [inputsDisabled, setInputsDisabled] = useState<boolean>(false);
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -41,11 +41,11 @@ const DatatValidationComponent = () => {
     setEditableData(JSON.stringify(combinedData.series, null, 2));
   };
 
-  const handleEditChange = (event, key, index, isArray) => {
+    const handleEditChange = (event: React.ChangeEvent<HTMLInputElement>, key: string, index: number | null, isArray: boolean) => {
     if (!inputsDisabled) {
       const newData = { ...data };
       if (isArray) {
-        newData[key][index][event.target.name] = event.target.value;
+        newData[key][index as number][event.target.name] = event.target.value;
       } else {
         newData[key][event.target.name] = event.target.value;
       }
@@ -55,7 +55,7 @@ const DatatValidationComponent = () => {
 
   const handleSave = () => {
     try {
-      const newData = JSON.parse(editableData);
+      const newData = JSON.parse(editableData as string);
       setData({ ...data, series: newData });
     } catch (error) {
       console.error('Error parsing JSON:', error);
@@ -66,7 +66,7 @@ const DatatValidationComponent = () => {
     setInputsDisabled(!inputsDisabled);
   };
   
-  const validate = (key) => {
+  const validate = (key: string) => {
     console.log(key);
   };
 
@@ -137,7 +137,7 @@ const DatatValidationComponent = () => {
                   <input
                     type="text"
                     name={itemKey}
-                    value={value}
+                    value={value as string}
                     onChange={(event) => handleEditChange(event, key, null, false)}
                     style={{
                       width: '100%', height: '40px', padding: '1', borderStyle: 'inherit',
@@ -171,7 +171,7 @@ const DatatValidationComponent = () => {
                   <input
                     type="text"
                     name={itemKey}
-                    value={value}
+                    value={value as string}
                     // size={15}
                     onChange={(event) => handleEditChange(event, key, index, true)}
                     // style={{ width: '100%', padding: '0', border: 'none', outline: 'none', backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}

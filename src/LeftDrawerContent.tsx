@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ListItemText, Divider, ListItemButton, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import LeftDrawerDynamicContent from './LeftDrawerDynamicContent';
+import LeftDrawerDynamicContent from './LeftDrawerDynamicContent.tsx';
 
 
-const LeftDrawerContent = () => {
+const LeftDrawerContent: FC = () => {
   return (
     <Box>
       <ListItemButton component={RouterLink} to="/">

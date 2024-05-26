@@ -2,8 +2,11 @@ import React from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Typography, Box, AppBar, Toolbar, IconButton, CssBaseline } from '@mui/material';
 
+interface HeaderProps {
+  setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Header = ({setDrawerOpen}) => {
+const Header: React.FC<HeaderProps> = ({setDrawerOpen}) => {
   
 
   const toggleDrawer = () => {

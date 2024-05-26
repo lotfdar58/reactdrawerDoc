@@ -1,14 +1,14 @@
-import { useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import { Box , Button} from "@mui/material";
 
 
-const DocumentSearchComponent = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+const DocumentSearchComponent: FC = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
   
-  const data = [
+  const data: string[] = [
     "document_1",
     "document_2",
     "document_3",
@@ -21,12 +21,12 @@ const DocumentSearchComponent = () => {
     "document_10"
   ];
 
-  const selectDocument = (e, key) => {
+  const selectDocument = (e: React.MouseEvent<HTMLButtonElement>, key: string) => {
     e.preventDefault();
     console.log(key);
   }
 
-  const filterData = (query, data) => {
+  const filterData = (query: string, data: string[]) => {
     if (!query) {
       return data;
     } else {
@@ -41,7 +41,7 @@ const DocumentSearchComponent = () => {
         <TextField
           id="search-bar"
           className="text"
-          onInput={(e) => {
+          onInput={(e: ChangeEvent<HTMLInputElement>) => {
             setSearchQuery(e.target.value);
           }}
           label="Enter Document"

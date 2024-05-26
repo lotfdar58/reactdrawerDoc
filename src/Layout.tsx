@@ -1,12 +1,16 @@
 
 import { Box } from '@mui/material';
-import React, { useState } from 'react';
-import LeftDrawer from './LeftDrawer';
-import Header from './Header';
+import React, { ReactNode, useState } from 'react';
+import LeftDrawer from './LeftDrawer.tsx';
+import Header from './Header.tsx';
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: ReactNode; 
+}
 
-    const [drawerOpen, setDrawerOpen] = useState(true);
+const Layout:React.FC<LayoutProps> = ({ children }) => {
+
+    const [drawerOpen, setDrawerOpen] = useState<boolean>(true);
 
   return (
     <Box sx={{ p:4}}>

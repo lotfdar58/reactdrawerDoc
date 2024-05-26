@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import DocumentSearchComponent from './DocumentSearchComponent';
+import DocumentSearchComponent from './DocumentSearchComponent.tsx';
 
-function LeftDrawerDynamicContent() {
+const LeftDrawerDynamicContent: React.FC = () => {
     const location = useLocation();
 
     const renderContent = () => {

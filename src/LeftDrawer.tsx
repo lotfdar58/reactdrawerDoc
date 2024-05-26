@@ -1,5 +1,5 @@
 import React from 'react';
-import DrawerList from './LeftDrawerContent';
+import DrawerList from './LeftDrawerContent.tsx';
 import { styled, useTheme } from '@mui/material/styles';
 import { Drawer, Box, Toolbar, IconButton, Divider } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -16,8 +16,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
   }));
 
+  interface LeftDrawerProps {
+    drawerOpen: boolean;
+    setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  }
 
-const LeftDrawer = ({drawerOpen, setDrawerOpen}) => {
+
+const LeftDrawer: React.FC<LeftDrawerProps> = ({drawerOpen, setDrawerOpen}) => {
 
   const theme = useTheme();
 

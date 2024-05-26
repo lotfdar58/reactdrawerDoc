@@ -3,7 +3,12 @@ import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 
-export default function RuleComponent() {
+interface RuleRow {
+  id: number;
+  rule: string;
+}
+
+const RuleComponent: React.FC = () => {
 
   const columns = [
     {
@@ -29,14 +34,14 @@ export default function RuleComponent() {
     }
   ];
   
-  const rows = [
+  const rows: RuleRow[] = [
     { id: 1, rule: 'rule1' },
     { id: 2, rule: 'rule2' },
     { id: 3, rule: 'rule3' },
     { id: 4, rule: 'rule4' },
   ];
 
-  const handleEditClick = (id) => {
+  const handleEditClick = (id: number) => {
     // Handle the edit button click
     console.log(`Edit button clicked for row id: ${id}`);
   };
@@ -60,3 +65,5 @@ export default function RuleComponent() {
     </Box>
   );
 }
+
+export default RuleComponent;

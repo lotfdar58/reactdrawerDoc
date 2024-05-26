@@ -1,6 +1,21 @@
+interface Column {
+  field: string;
+  headerName: string;
+  width: number;
+  type: 'text' | 'number' | 'date' | 'select';
+  editable?: boolean;
+  description?: string;
+}
+
+interface Model {
+  type: 'array' | 'single';
+  columns?: Column[];
+  field?: string;
+}
+
 
 // TODO: Since we may need add remove fields this part should be kept inside database
-export const columnsModel = {
+export const columnsModel: {[key: string]: Model} = {
     schedule: { 
         type: 'array',
         columns: [
@@ -29,6 +44,7 @@ export const columnsModel = {
             {
               field: 'emai.',
               headerName: 'Email',
+              type: 'text',
               description: '',
               width: 160,
             },
@@ -60,6 +76,7 @@ export const columnsModel = {
         {
           field: 'emai.',
           headerName: 'Email',
+          type: 'text',
           description: '',
           width: 160,
         },
