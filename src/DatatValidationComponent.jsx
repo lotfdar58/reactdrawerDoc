@@ -18,9 +18,6 @@ const DatatValidationComponent = () => {
     loadCombinedData();
   }, []);
 
-  // Sample combined JSON data
-  const dataMeta = columnsModel;
-  console.log(dataMeta);
   const combinedData = {
     schedule: [
       { id: 1, name: 'Alice', age: 30, location: 'New York', email: 'alice@example.com' },
@@ -101,64 +98,10 @@ const DatatValidationComponent = () => {
                     </Button>
                 </Box>
                 <AccordionDetails>
-                  {Array.isArray(data[key]) ? (
-                    <TableContainer component={Paper}>
-                      <Table>
-                        <TableHead>
-                          <TableRow>
-                            {Object.keys(data[key][0]).map((header, index) => (
-                              <TableCell key={index}>{header}</TableCell>
-                            ))}
-                          </TableRow>
-                        </TableHead>
-                        <TableBody>
-                          {data[key].map((item, index) => (
-                            <TableRow key={index}>
-                              {Object.entries(item).map(([itemKey, value]) => (
-                                <TableCell key={itemKey} sx={{ padding: '10px'}}>
-                                  <input
-                                    type="text"
-                                    name={itemKey}
-                                    value={value}
-                                    // size={15}
-                                    onChange={(event) => handleEditChange(event, key, index, true)}
-                                    // style={{ width: '100%', padding: '0', border: 'none', outline: 'none', backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
-                                    style={{ width: '100%', height: '40px',padding: '1', borderStyle: 'inherit',
-                                            backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
-                                    disabled={inputsDisabled}
-                                  />
-                                </TableCell>
-                              ))}
-                            </TableRow>
-                          ))}
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
+                  {columnsModel[key].type === 'array' ? (
+                    TableContent(key)
                   ) : (
-                    <Box>
-                        <TableContainer component={Paper}>
-                          <Table>
-                            <TableBody>
-                              {Object.entries(data[key]).map(([itemKey, value], index) => (
-                                <TableRow key={index}>
-                                  <TableCell>{itemKey}</TableCell>
-                                  <TableCell>
-                                    <input
-                                      type="text"
-                                      name={itemKey}
-                                      value={value}
-                                      onChange={(event) => handleEditChange(event, key, null, false)}
-                                      style={{ width: '100%', height: '40px',padding: '1', borderStyle: 'inherit',
-                                      backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
-                                      disabled={inputsDisabled}
-                                    />
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                            </TableBody>
-                          </Table>
-                        </TableContainer>
-                    </Box>
+                    SingleValueContent(key)
                   )}
                 </AccordionDetails>
                 {key === 'series' && (
@@ -174,6 +117,70 @@ const DatatValidationComponent = () => {
         )}
       </Box>
   );
+
+  function SingleValueContent(key) {
+    return <Box>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableBody>
+            {Object.entries(data[key]).map(([itemKey, value], index) => (
+              <TableRow key={index}>
+                <TableCell>{itemKey}</TableCell>
+                <TableCell>
+                  <input
+                    type="text"
+                    name={itemKey}
+                    value={value}
+                    onChange={(event) => handleEditChange(event, key, null, false)}
+                    style={{
+                      width: '100%', height: '40px', padding: '1', borderStyle: 'inherit',
+                      backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent'
+                    }}
+                    disabled={inputsDisabled} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>;
+  }
+
+  function TableContent(key) {
+    return <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            {Object.keys(data[key][0]).map((header, index) => (
+              <TableCell key={index}>{header}</TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data[key].map((item, index) => (
+            <TableRow key={index}>
+              {Object.entries(item).map(([itemKey, value]) => (
+                <TableCell key={itemKey} sx={{ padding: '10px' }}>
+                  <input
+                    type="text"
+                    name={itemKey}
+                    value={value}
+                    // size={15}
+                    onChange={(event) => handleEditChange(event, key, index, true)}
+                    // style={{ width: '100%', padding: '0', border: 'none', outline: 'none', backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
+                    style={{
+                      width: '100%', height: '40px', padding: '1', borderStyle: 'inherit',
+                      backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent'
+                    }}
+                    disabled={inputsDisabled} />
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>;
+  }
 };
 
 export default DatatValidationComponent;
