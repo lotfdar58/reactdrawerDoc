@@ -2,7 +2,11 @@ import React, { useState , useEffect} from 'react';
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Button, Table, TableBody, 
          TableCell, TableContainer, TableHead, TableRow, Paper,Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import { green } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
+import { columnsModel } from './config';
 
 const DatatValidationComponent = () => {
   const [data, setData] = useState(null);
@@ -12,9 +16,11 @@ const DatatValidationComponent = () => {
   useEffect(() => {
     // Update the document title using the browser API
     loadCombinedData();
-  });
+  }, []);
 
   // Sample combined JSON data
+  const dataMeta = columnsModel;
+  console.log(dataMeta);
   const combinedData = {
     schedule: [
       { id: 1, name: 'Alice', age: 30, location: 'New York', email: 'alice@example.com' },
@@ -80,7 +86,8 @@ const DatatValidationComponent = () => {
             {Object.keys(data).map((key, idx) => (
               <Accordion key={idx} sx={{ marginTop: '10px' }}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`${key}-content`} id={`${key}-header`}>
-                  <Typography variant="subtitle1">{key.charAt(0).toUpperCase() + key.slice(1)}</Typography>
+                <CloseIcon sx={{ color: red[500] }}/> <CheckIcon sx={{ color: green[500] }}/> 
+                <Typography variant="subtitle1">{key.charAt(0).toUpperCase() + key.slice(1)}</Typography>
                 </AccordionSummary>
                 <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
                     <Button variant="outlined" onClick={toggleInputs} sx={{ marginRight: 2 }}>
@@ -108,13 +115,16 @@ const DatatValidationComponent = () => {
                           {data[key].map((item, index) => (
                             <TableRow key={index}>
                               {Object.entries(item).map(([itemKey, value]) => (
-                                <TableCell key={itemKey}>
+                                <TableCell key={itemKey} sx={{ padding: '10px'}}>
                                   <input
                                     type="text"
                                     name={itemKey}
                                     value={value}
+                                    // size={15}
                                     onChange={(event) => handleEditChange(event, key, index, true)}
-                                    style={{ width: '100%', padding: '0', border: 'none', outline: 'none', backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
+                                    // style={{ width: '100%', padding: '0', border: 'none', outline: 'none', backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
+                                    style={{ width: '100%', height: '40px',padding: '1', borderStyle: 'inherit',
+                                            backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
                                     disabled={inputsDisabled}
                                   />
                                 </TableCell>
@@ -138,7 +148,8 @@ const DatatValidationComponent = () => {
                                       name={itemKey}
                                       value={value}
                                       onChange={(event) => handleEditChange(event, key, null, false)}
-                                      style={{ width: '100%', padding: '0', border: 'none', outline: 'none', backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
+                                      style={{ width: '100%', height: '40px',padding: '1', borderStyle: 'inherit',
+                                      backgroundColor: inputsDisabled ? '#f2f2f2' : 'transparent' }}
                                       disabled={inputsDisabled}
                                     />
                                   </TableCell>

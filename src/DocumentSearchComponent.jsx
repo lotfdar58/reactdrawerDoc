@@ -9,16 +9,16 @@ const DocumentSearchComponent = () => {
   const [searchQuery, setSearchQuery] = useState("");
   
   const data = [
-    "Paris",
-    "London",
-    "New York",
-    "Tokyo",
-    "Berlin",
-    "Buenos Aires",
-    "Cairo",
-    "Canberra",
-    "Rio de Janeiro",
-    "Dublin"
+    "document_1",
+    "document_2",
+    "document_3",
+    "document_4",
+    "document_5",
+    "document_6",
+    "document_7",
+    "document_8",
+    "document_9",
+    "document_10"
   ];
 
   const selectDocument = (e, key) => {

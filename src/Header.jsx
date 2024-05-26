@@ -13,7 +13,7 @@ const Header = ({setDrawerOpen}) => {
   return (
     <Box>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1}}>
         <Toolbar>
           <IconButton
             color="inherit"
