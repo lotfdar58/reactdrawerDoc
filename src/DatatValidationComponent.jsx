@@ -4,7 +4,7 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography, Button, Tabl
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-const DataDisplay = () => {
+const DatatValidationComponent = () => {
   const [data, setData] = useState(null);
   const [editableData, setEditableData] = useState(null);
   const [inputsDisabled, setInputsDisabled] = useState(false);
@@ -165,4 +165,4 @@ const DataDisplay = () => {
   );
 };
 
-export default DataDisplay;
+export default DatatValidationComponent;
