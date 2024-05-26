@@ -69,16 +69,23 @@ const DatatValidationComponent = () => {
   const validate = (key) => {
     console.log(key);
   };
+
+  const addNewAttribute = () => {
+
+  }
   
 
   return (
     <Box>
       {/* <CssBaseline /> */}
         
-        {data === null ? (
-          <Typography>Click the button to load data</Typography>
+        {data == null ? (
+          <Typography>no data</Typography>
         ) : (
           <Box>
+            <Button variant="outlined" onClick={addNewAttribute} sx={{ marginRight: 2 }}>
+                         Add Attribute
+            </Button>
 
             {Object.keys(data).map((key, idx) => (
               <Accordion key={idx} sx={{ marginTop: '10px' }}>
